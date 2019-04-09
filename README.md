@@ -22,5 +22,22 @@ docker network create --driver=bridge --ip-range=192.168.1.192/27 --subnet=192.1
 ```
 docker run --rm -it --network=br0 --ip=192.168.1.200 nginx
 ```
-3. ???
-4. Profit
+3. Create gitlab container
+```
+docker run --detach \
+  --name gitlab \
+  --hostname gitlab.zag \
+  --network br0 \
+  --ip 192.168.1.200 \
+  --publish 22:22 \
+  --publish 80:80 \
+  --publish 443:443 \
+  --restart always \
+  --volume /srv/gitlab/config:/etc/gitlab \
+  --volume /srv/gitlab/logs:/var/log/gitlab \
+  --volume /srv/gitlab/data:/var/opt/gitlab \
+  --env GITLAB_OMNIBUS_CONFIG="external_url http://gitlab.zag/;" \
+  gitlab/gitlab-ce:latest
+```
+4. ???
+5. Profit
