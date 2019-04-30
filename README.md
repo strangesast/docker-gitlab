@@ -36,7 +36,7 @@ docker run --detach \
   --volume /srv/gitlab/config:/etc/gitlab \
   --volume /srv/gitlab/logs:/var/log/gitlab \
   --volume /srv/gitlab/data:/var/opt/gitlab \
-  --env GITLAB_OMNIBUS_CONFIG="external_url http://gitlab.zag/;" \
+  --env GITLAB_OMNIBUS_CONFIG="external_url 'http://gitlab.zag/';" \
   gitlab/gitlab-ce:latest
 ```
 4. ???
