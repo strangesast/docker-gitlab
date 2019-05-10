@@ -1,7 +1,13 @@
+# Create
+-1. Disable NetworkManager
+```
+sudo apt-get purge -y network-manager
+```
 0. Create bridge network interface
 ```
 # netplan.yml
 network
+  renderer: networkd
   ...
   bridges:
     br0:
@@ -41,3 +47,16 @@ docker run --detach \
 ```
 4. ???
 5. Profit
+
+
+# Backup & Restore
+```
+# backup
+docker exec -t gitlab gitlab-rake gitlab:backup:create
+docker cp gitlab:/var/opt/gitlab/backups/<backup>.tar .
+
+# restore
+docker cp <backup>.tar gitlab:/var/opt/gitlab/backups/
+docker exec -it gitlab gitlab-rake gitlab:backup:restore
+```
+
